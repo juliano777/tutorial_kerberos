@@ -245,7 +245,7 @@ kadmin.local -q 'addprinc ktadd host/kerberos.foo.com'
 
 # Instale o Kerberos client:
 
-yum -y install krb5-workstation
+yum -y install krb5-workstation && yum clean all
 
 
 
