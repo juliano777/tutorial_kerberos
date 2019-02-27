@@ -91,3 +91,11 @@ driftfile /var/lib/ntp/drift
 EOF
 
 
+
+# Iniciando e habilitando o serviço do NTP:
+
+systemctl start  ntpd.service
+
+systemctl enable ntpd.service
+
+
