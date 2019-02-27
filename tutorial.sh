@@ -263,7 +263,7 @@ kadmin -p root/admin
 
 # Adicione alguns principais no host:
 
-kadmin -q 'addprinc --randkey host/client.foo.com'
+kadmin -q 'addprinc -randkey host/client.foo.com'
 kadmin -q 'ktadd host/kerberos.foo.com'
 
 
