@@ -215,12 +215,22 @@ user1@FOO.COM
 
 
 
-# 
+# Apagar principais desnecessários:
+
+kadmin.local -q 'delprinc kadmin/ec2-23-23-86-44.compute-1.amazonaws.com@FOO.COM'
+kadmin.local -q 'delprinc kiprop/ec2-23-23-86-44.compute-1.amazonaws.com@FOO.COM'
 
 
 
+# Iniciar Kerberos KDC e kadmin daemons e também habilitá-los:
 
-delprinc jennifer
+systemctl start krb5kdc.service
+systemctl start kadmin.service
+systemctl enable krb5kdc.service
+systemctl enable kadmin.service
+
+
+
 
 
 
