@@ -231,8 +231,12 @@ systemctl enable k{rb5kdc,admin}.service
 
 # Now, let’s create a principal for our KDC server and stick it in it’s keytab:
 
-kadmin.local -q 'addprinc kadmin/ec2-23-23-86-44.compute-1.amazonaws.com@FOO.COM'
-kadmin.local -q 'addprinc kiprop/ec2-23-23-86-44.compute-1.amazonaws.com@FOO.COM'
+kadmin.local -q 'addprinc -randkey host/kerberos.foo.com'
+kadmin.local -q 'addprinc ktadd host/kerberos.foo.com'
+
+
+
+# =============================================================================
 
 
 
