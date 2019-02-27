@@ -222,7 +222,7 @@ kadmin.local -q 'delprinc kiprop/ec2-23-23-86-44.compute-1.amazonaws.com@FOO.COM
 
 
 
-# Iniciar Kerberos KDC e kadmin daemons e também habilitá-los:
+# Iniciar Kerberos KDC e kadmin daemons e também habilitá-los (krb5kdc e admin):
 
 systemctl start k{rb5kdc,admin}.service
 systemctl enable k{rb5kdc,admin}.service
@@ -237,6 +237,10 @@ kadmin.local -q 'addprinc ktadd host/kerberos.foo.com'
 
 
 # =============================================================================
+# Configurando o Cliente Kerberos
+# =============================================================================
+
+
 
 
 
