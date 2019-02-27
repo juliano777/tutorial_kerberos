@@ -78,7 +78,7 @@ ntpdate ntp.cais.rnp.br
 
 
 
-# 
+# Criar o arquivo de configuração para sincronização do NTP
 
 cat << EOF > /etc/ntp.conf
 tinker panic 0
