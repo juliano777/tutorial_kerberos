@@ -183,6 +183,12 @@ echo '*/admin@FOO.COM	    *' > /var/kerberos/krb5kdc/kadm5.acl
 
 
 
+# SDSSSD
+
+kdb5_util create -r CW.COM -s
+
+
+
 # 
 
 kadmin.local << EOF
