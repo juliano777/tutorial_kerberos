@@ -154,14 +154,14 @@ EOF
 # /var/kerberos/krb5kdc/kdc.conf
 
 cat << EOF > /var/kerberos/krb5kdc/kdc.conf
-default_realm = CW.COM
+default_realm = FOO.COM
 
 [kdcdefaults]
     v4_mode = nopreauth
     kdc_ports = 0
 
 [realms]
-    CW.COM = {
+    FOO.COM = {
         kdc_ports = 88
         admin_keytab = /etc/kadm5.keytab
         database_name = /var/kerberos/krb5kdc/principal
@@ -175,6 +175,9 @@ default_realm = CW.COM
     }
 EOF
 
+
+
+# /var/kerberos/krb5kdc/kadm5.acl
 
 
 
