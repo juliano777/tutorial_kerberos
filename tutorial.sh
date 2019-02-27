@@ -247,17 +247,21 @@ kadmin.local -q 'addprinc ktadd host/kerberos.foo.com'
 
 yum -y install krb5-workstation
 
-Transfer your /etc/krb5.conf (which got created from above command) from the KDC server to the client. Hop onto the client server, install the Kerberos client package and add some host principals:
 
-Transfira seu /etc/krb5.conf (que foi criado a partir do comando acima) do servidor KDC para o cliente. Entre no servidor do cliente, instale o pacote do cliente Kerberos e adicione alguns principais no host:
 
-# :
+# Transfira seu /etc/krb5.conf (que foi criado a partir do comando acima) do servidor KDC para o cliente:
+
+scp root@kerberos.foo.com:/etc/krb5.conf /etc/krb5.conf
+
+
+
+# Adicione alguns principais no host:
 
 kadmin -p root/admin
 
 
 
-# :
+# Adicione alguns principais no host:
 
 kadmin.local -q 'addpinc --randkey host/client.foo.com'
 kadmin.local -q 'ktadd host/kerberos.foo.com'
