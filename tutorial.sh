@@ -269,7 +269,7 @@ kadmin.local -q 'ktadd host/kerberos.foo.com'
 
 
 # =============================================================================
-# Setting up SSH to use Kerberos Authentication
+# Configurando a autenticação Kerberos no SSH
 # =============================================================================
 
 
@@ -285,6 +285,9 @@ GSSAPICleanupCredentials yes
 UsePAM no
 
 Now, restart the ssh daemon.
+
+
+
 Step2: Configure the SSH Client
 
 Configure /etc/ssh_config to include following lines:
