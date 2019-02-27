@@ -133,10 +133,10 @@ cat << EOF > /etc/krb5.conf
     permitted_enctypes = des-cbc-md5 des-cbc-crc des3-cbc-sha1
 
 [realms]
-    CW.COM = {
-        kdc = kdc.cw.com:88
-        admin_server = kdc.cw.com:749
-        default_domain = cw.com
+    FOO.COM = {
+        kdc = kerberos.foo.com:88
+        admin_server = kerberos.foo.com:749
+        default_domain = foo.com
     }
 
 [domain_realm]
