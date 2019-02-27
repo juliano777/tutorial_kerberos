@@ -277,6 +277,15 @@ kadmin -q 'ktadd host/kerberos.foo.com'
 Pre-Req: Make sure you can issue a kinit -k host/fqdn@REALM and get back a kerberos ticket without having to specify a password.
 Step1: Configuring SSH Server
 
+
+
+# 
+
+kinit -k host/foo.com@FOO.COM
+
+
+
+
 Configure /etc/ssh/sshd_config file to include the following lines:
 
 KerberosAuthentication yes
