@@ -200,8 +200,9 @@ kadmin.local -q 'ktadd -k /var/kerberos/krb5kdc/kadm5.keytab kadmin/changepw'
 
 # Listar os principais da base:
 
-'
 kadmin.local -q listprincs
+
+'
 Authenticating as principal root/admin@FOO.COM with password.
 K/M@FOO.COM
 kadmin/admin@FOO.COM
