@@ -230,7 +230,7 @@ systemctl enable k{rb5kdc,admin}.service
 
 
 
-# Now, let’s create a principal for our KDC server and stick it in it’s keytab:
+# Agora, vamos criar uma entidade principal para o nosso servidor KDC e colocá-lo na tabela de chaves (keytab):
 
 kadmin.local -q 'addprinc -randkey host/kerberos.foo.com'
 kadmin.local -q 'addprinc ktadd host/kerberos.foo.com'
@@ -248,6 +248,8 @@ kadmin.local -q 'addprinc ktadd host/kerberos.foo.com'
 yum -y install krb5-workstation
 
 Transfer your /etc/krb5.conf (which got created from above command) from the KDC server to the client. Hop onto the client server, install the Kerberos client package and add some host principals:
+
+Transfira seu /etc/krb5.conf (que foi criado a partir do comando acima) do servidor KDC para o cliente. Entre no servidor do cliente, instale o pacote do cliente Kerberos e adicione alguns principais no host:
 
 # :
 
