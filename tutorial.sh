@@ -66,12 +66,28 @@ Cada ticket tem uma expiração (geralmente 10 horas).
 # Servidor: kerberos.foo.com
 
 
+# Instalação de pacotes e limpeza posterior:
+
+yum install -y krb5-{server,libs,workstation} libkadm5 ntp && yum clean all
 
 
 
+# Sincronizando o relógio do sistema;
+
+ntpdate ntp.cais.rnp.br
 
 
 
+# 
 
+cat << EOF > /etc/ntp.conf
+tinker panic 0
+restrict default kod nomodify notrap nopeer noquery
+restrict -6 default kod nomodify notrap nopeer noquery
+restrict 127.0.0.1
+restrict -6 ::1
+server ntpdate ntp.cais.rnp.br iburst
+driftfile /var/lib/ntp/drift
+EOF
 
 
