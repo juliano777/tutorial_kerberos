@@ -183,13 +183,13 @@ echo '*/admin@FOO.COM	    *' > /var/kerberos/krb5kdc/kadm5.acl
 
 
 
-# SDSSSD
+# Create the database and set a good password which you can remember. This command also stashes your password on the KDC so you don’t have to enter it each time you start the KDC
 
 kdb5_util create -r FOO.COM -s
 
 
 
-# 
+# Now on the KDC create a admin principal and also a test user (user1):
 
 kadmin.local -q 'addprinc root/admin'
 kadmin.local -q 'addprinc user1'
