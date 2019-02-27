@@ -60,6 +60,13 @@ Cada ticket tem uma expiração (geralmente 10 horas).
 "
 
 # 
+# Realm: FOO.COM
+# DNS: foo.com
+# hostname
+# Servidor: kerberos.foo.com
+
+
+
 
 
 
