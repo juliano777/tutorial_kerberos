@@ -99,3 +99,7 @@ systemctl start  ntpd.service
 systemctl enable ntpd.service
 
 
+
+# 
+
+
