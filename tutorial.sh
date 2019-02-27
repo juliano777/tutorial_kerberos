@@ -198,6 +198,32 @@ kadmin.local -q 'ktadd -k /var/kerberos/krb5kdc/kadm5.keytab kadmin/changepw'
 
 
 
+# Listar os principais da base:
+
+'
+kadmin.local -q listprincs
+Authenticating as principal root/admin@FOO.COM with password.
+K/M@FOO.COM
+kadmin/admin@FOO.COM
+kadmin/changepw@FOO.COM
+kadmin/ec2-23-23-86-44.compute-1.amazonaws.com@FOO.COM
+kiprop/ec2-23-23-86-44.compute-1.amazonaws.com@FOO.COM
+krbtgt/FOO.COM@FOO.COM
+root/admin@FOO.COM
+user1@FOO.COM
+'
+
+
+
+# 
+
+
+
+
+delprinc jennifer
+
+
+
 
 
 
