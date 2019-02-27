@@ -140,13 +140,42 @@ cat << EOF > /etc/krb5.conf
     }
 
 [domain_realm]
-    .cw.com = CW.COM
-     cw.com = CW.COM
+    .foo.com = FOO.COM
+     foo.com = FOO.COM
 
 [logging]
     kdc = FILE:/var/log/krb5kdc.log
     admin_server = FILE:/var/log/kadmin.log
     default = FILE:/var/log/krb5lib.log
 EOF
+
+
+
+# /var/kerberos/krb5kdc/kdc.conf
+
+cat << EOF > /var/kerberos/krb5kdc/kdc.conf
+default_realm = CW.COM
+
+[kdcdefaults]
+    v4_mode = nopreauth
+    kdc_ports = 0
+
+[realms]
+    CW.COM = {
+        kdc_ports = 88
+        admin_keytab = /etc/kadm5.keytab
+        database_name = /var/kerberos/krb5kdc/principal
+        acl_file = /var/kerberos/krb5kdc/kadm5.acl
+        key_stash_file = /var/kerberos/krb5kdc/stash
+        max_life = 10h 0m 0s
+        max_renewable_life = 7d 0h 0m 0s
+        master_key_type = des3-hmac-sha1
+        supported_enctypes = arcfour-hmac:normal des3-hmac-sha1:normal des-cbc-crc:normal des:normal des:v4 des:norealm des:onlyrealm des:afs3
+        default_principal_flags = +preauth
+    }
+EOF
+
+
+
 
 
