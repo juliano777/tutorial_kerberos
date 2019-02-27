@@ -185,19 +185,18 @@ echo '*/admin@FOO.COM	    *' > /var/kerberos/krb5kdc/kadm5.acl
 
 # SDSSSD
 
-kdb5_util create -r CW.COM -s
+kdb5_util create -r FOO.COM -s
 
 
 
 # 
 
-kadmin.local << EOF
-addprinc root/admin
-addprinc user1
-ktadd -k /var/kerberos/krb5kdc/kadm5.keytab kadmin/admin
-ktadd -k /var/kerberos/krb5kdc/kadm5.keytab kadmin/changepw
-exit
-EOF
+kadmin.local -q 'addprinc root/admin'
+kadmin.local -q 'addprinc user1'
+kadmin.local -q 'ktadd -k /var/kerberos/krb5kdc/kadm5.keytab kadmin/admin'
+kadmin.local -q 'ktadd -k /var/kerberos/krb5kdc/kadm5.keytab kadmin/changepw'
+
+
 
 
 
