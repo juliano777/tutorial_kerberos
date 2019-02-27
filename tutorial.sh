@@ -224,10 +224,14 @@ kadmin.local -q 'delprinc kiprop/ec2-23-23-86-44.compute-1.amazonaws.com@FOO.COM
 
 # Iniciar Kerberos KDC e kadmin daemons e também habilitá-los:
 
-systemctl start krb5kdc.service
-systemctl start kadmin.service
-systemctl enable krb5kdc.service
-systemctl enable kadmin.service
+systemctl start k{rb5kdc,admin}.service
+systemctl enable k{rb5kdc,admin}.service
+
+
+
+
+
+
 
 
 
