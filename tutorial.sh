@@ -65,6 +65,24 @@ Cada ticket tem uma expiração (geralmente 10 horas).
 # hostname
 # Servidor: kerberos.foo.com
 
+"
+Packages required:
+
+    KDC server package: krb5-server
+    Admin package: krb5-libs
+    Client package: krb5-workstation
+
+Configuration Files:
+
+    /var/kerberos/krb5kdc/kdc.conf
+    /var/kerberos/krb5kdc/kadm5.acl
+    /etc/krb5.conf
+
+Important Paths:
+
+    KDC path: /var/kerberos/krb5kdc/
+"
+
 
 # Instalação de pacotes e limpeza posterior:
 
@@ -100,6 +118,6 @@ systemctl enable ntpd.service
 
 
 
-# 
+# /etc/krb5.conf'
 
 
