@@ -179,7 +179,13 @@ EOF
 
 # /var/kerberos/krb5kdc/kadm5.acl
 
-echo '*/admin@FOO.COM	    *' > /var/kerberos/krb5kdc/kadm5.acl 
+echo '*/admin@FOO.COM	    *' > /var/kerberos/krb5kdc/kadm5.acl
+
+
+
+# 
+
+kadmin.local -q "addprinc user${i}"
 
 
 
