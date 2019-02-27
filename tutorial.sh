@@ -185,7 +185,16 @@ echo '*/admin@FOO.COM	    *' > /var/kerberos/krb5kdc/kadm5.acl
 
 # 
 
-kadmin.local -q "addprinc user${i}"
+kadmin.local << EOF
+addprinc root/admin
+addprinc user1
+ktadd -k /var/kerberos/krb5kdc/kadm5.keytab kadmin/admin
+ktadd -k /var/kerberos/krb5kdc/kadm5.keytab kadmin/changepw
+exit
+EOF
+
+
+
 
 
 
