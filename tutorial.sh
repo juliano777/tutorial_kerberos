@@ -158,11 +158,10 @@ default_realm = FOO.COM
 
 [kdcdefaults]
     v4_mode = nopreauth
-    kdc_ports = 0
-
+    kdc_ports = 88
+    kdc_tcp_ports = 88
 [realms]
-    FOO.COM = {
-        kdc_ports = 88
+    FOO.COM = {        
         admin_keytab = /etc/kadm5.keytab
         database_name = /var/kerberos/krb5kdc/principal
         acl_file = /var/kerberos/krb5kdc/kadm5.acl
