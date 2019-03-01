@@ -86,7 +86,8 @@ Important Paths:
 
 # Instalação de pacotes e limpeza posterior:
 
-yum install -y krb5-{server,libs,workstation} libkadm5 ntp && yum clean all
+yum install -y krb5-{server,libs,workstation} libkadm5 ntp pam_krb5 \
+&& yum clean all
 
 
 
