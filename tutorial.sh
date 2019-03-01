@@ -1,5 +1,8 @@
 # https://www.kerberos.org/software/tutorial.html
 
+# https://www.certdepot.net/rhel7-configure-kerberos-kdc/
+# 
+
 ## Termos
 
 # Realm / Domínio
