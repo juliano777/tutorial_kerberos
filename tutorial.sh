@@ -1,7 +1,7 @@
 # https://www.kerberos.org/software/tutorial.html
 
 # https://www.certdepot.net/rhel7-configure-kerberos-kdc/
-# 
+# https://www.certdepot.net/rhel7-configure-system-authenticate-using-kerberos/
 
 ## Termos
 
