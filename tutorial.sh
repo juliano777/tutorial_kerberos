@@ -301,10 +301,22 @@ scp root@${SRV_KRB}:/etc/krb5.conf /etc/krb5.conf
 
 
 
+# Digite o seu domínio:
+
+read -p 'Digite o seu domínio: ' DOM_LOW
+
+
+
+# Convertendo o domínio para letras maiúsculas
+
+export DOM_UPPER=`echo ${DOM_LOW} | tr 'a-z' 'A-Z'`
+
+
+
 # Adicione alguns principais no host:
 
-kadmin -q 'addprinc -randkey host/client.${DOM_UPPER}' -p root/admin
-kadmin -q 'ktadd host/kerberos.${DOM_UPPER}' -p root/admin
+kadmin -q "addprinc -randkey host/client.${DOM_UPPER}" -p root/admin
+kadmin -q "ktadd host/kerberos.${DOM_UPPER}" -p root/admin
 
 
 
