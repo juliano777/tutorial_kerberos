@@ -94,15 +94,15 @@ yum install -y krb5-{server,libs,workstation} libkadm5 ntp pam_krb5 \
 
 
 
-# Digite o endereço de servidor NTP:
+# Digite o endereço de servidor NTP: <ntp.cais.rnp.br>
 
-
+read -p 'Digite o endereço de servidor NTP: ' NTPSERVER
 
 
 
 # Sincronizando o relógio do sistema;
 
-ntpdate ntp.cais.rnp.br
+ntpdate ${NTPSERVER}
 
 
 
@@ -114,7 +114,7 @@ restrict default kod nomodify notrap nopeer noquery
 restrict -6 default kod nomodify notrap nopeer noquery
 restrict 127.0.0.1
 restrict -6 ::1
-server ntpdate ntp.cais.rnp.br iburst
+server ntpdate ${NTPSERVER} iburst
 driftfile /var/lib/ntp/drift
 EOF
 
