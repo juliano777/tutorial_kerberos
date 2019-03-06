@@ -114,7 +114,13 @@ export DOM_UPPER=`echo ${DOM_LOW} | tr 'a-z' 'A-Z'`
 
 # FQDN DO SERVER
 
-export SRV_FQDN="`hostname | cut -f1 -d.`.${DOM_LOW}"
+export SRV_HOSTNAME=`hostname | cut -f1 -d.`
+
+
+
+# FQDN DO SERVER
+
+export SRV_FQDN="`${SRV_HOSTNAME}.${DOM_LOW}"
 
 
 
@@ -219,7 +225,7 @@ kdb5_util create -r ${DOM_UPPER} -s
 
 # Now on the KDC create a admin principal and also a test user (user1):
 
-# kadmin.local -q 'addprinc root/admin'
+kadmin.local -q 'addprinc root/admin'
 kadmin.local -q 'addprinc user1'
 kadmin.local -q 'ktadd -k /var/kerberos/krb5kdc/kadm5.keytab kadmin/admin'
 kadmin.local -q 'ktadd -k /var/kerberos/krb5kdc/kadm5.keytab kadmin/changepw'
@@ -260,7 +266,7 @@ systemctl enable k{rb5kdc,admin}.service
 
 # Agora, vamos criar uma entidade principal para o nosso servidor KDC e colocá-lo na tabela de chaves (keytab):
 
-kadmin.local -q 'addprinc -randkey host/kerberos.${DOM_UPPER}'
+kadmin.local -q 'addprinc -randkey host/kdc.${DOM_UPPER}'
 kadmin.local -q 'ktadd host/kerberos.${DOM_UPPER}'
 
 
