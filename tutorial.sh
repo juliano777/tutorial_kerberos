@@ -179,9 +179,9 @@ cat << EOF > /etc/krb5.conf
      ${DOM_LOW} = ${DOM_UPPER}
 
 [logging]
+    default = FILE:/var/log/krb5lib.log
     kdc = FILE:/var/log/krb5kdc.log
     admin_server = FILE:/var/log/kadmin.log
-    default = FILE:/var/log/krb5lib.log
 EOF
 
 
