@@ -322,7 +322,7 @@ export CLIENT_HOSTNAME=`hostname | cut -f1 -d.`
 # Adicione alguns principais no host:
 
 kadmin -q "addprinc -randkey host/${CLIENT_HOSTNAME}.${DOM_UPPER}" -p root/admin
-kadmin -q "ktadd host/kerberos.${DOM_UPPER}" -p root/admin
+kadmin -q "ktadd host/${SRV_KRB}.${DOM_UPPER}" -p root/admin
 
 
 
