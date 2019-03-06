@@ -266,8 +266,8 @@ systemctl enable k{rb5kdc,admin}.service
 
 # Agora, vamos criar uma entidade principal para o nosso servidor KDC e colocá-lo na tabela de chaves (keytab):
 
-kadmin.local -q 'addprinc -randkey host/kdc.${DOM_UPPER}'
-kadmin.local -q 'ktadd host/kerberos.${DOM_UPPER}'
+kadmin.local -q "addprinc -randkey host/${SRV_HOSTNAME}.${DOM_UPPER}"
+kadmin.local -q "ktadd host/${SRV_HOSTNAME}.${DOM_UPPER}"
 
 
 
