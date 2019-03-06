@@ -122,7 +122,7 @@ EOF
 
 # Iniciando e habilitando o serviço do NTP:
 
-systemctl start  ntpd.service
+systemctl start ntpd.service
 
 systemctl enable ntpd.service
 
