@@ -126,7 +126,7 @@ export SRV_FQDN="${SRV_HOSTNAME}.${DOM_LOW}"
 
 # Configurando o hostname:
 
-hostnamectl set-hostname ${SRV_FQDN}
+hostnamectl set-hostname ${SRV_FQDN} && systemctl restart systemd-hostnamed
 
 
 
