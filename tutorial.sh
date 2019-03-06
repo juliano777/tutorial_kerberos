@@ -94,6 +94,12 @@ yum install -y krb5-{server,libs,workstation} libkadm5 ntp pam_krb5 \
 
 
 
+# Digite o endereço de servidor NTP:
+
+
+
+
+
 # Sincronizando o relógio do sistema;
 
 ntpdate ntp.cais.rnp.br
