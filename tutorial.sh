@@ -63,10 +63,10 @@ Cada ticket tem uma expiração (geralmente 10 horas).
 "
 
 # 
-# Realm: FOO.COM
-# DNS: foo.com
+# Realm: ${DOM_UPPER}
+# DNS: ${DOM_UPPER}
 # hostname
-# Servidor: kerberos.foo.com
+# Servidor: kdc.${DOM_UPPER}
 
 "
 Packages required:
@@ -112,6 +112,12 @@ export DOM_UPPER=`echo ${DOM_LOW} | tr 'a-z' 'A-Z'`
 
 
 
+# FQDN DO SERVER
+
+export SRV_FQDN="`hostname | cut -f1 -d.`.${DOM_LOW}"
+
+
+
 # Sincronizando o relógio do sistema;
 
 ntpdate ${NTPSERVER}
@@ -144,7 +150,7 @@ systemctl enable ntpd.service
 
 cat << EOF > /etc/krb5.conf
 [libdefaults]
-    default_realm = FOO.COM
+    default_realm = ${DOM_UPPER}
     dns_lookup_realm = false
     dns_lookup_kdc = false
     ticket_lifetime = 24h
@@ -155,15 +161,15 @@ cat << EOF > /etc/krb5.conf
     permitted_enctypes = des-cbc-md5 des-cbc-crc des3-cbc-sha1
 
 [realms]
-    FOO.COM = {
-        kdc = kerberos.foo.com:88
-        admin_server = kerberos.foo.com:749
-        default_domain = foo.com
+    ${DOM_UPPER} = {
+        kdc = ${SRV_FQDN}:88
+        admin_server = ${SRV_FQDN}:749
+        default_domain = ${DOM_LOW}
     }
 
 [domain_realm]
-    .foo.com = FOO.COM
-     foo.com = FOO.COM
+    .${DOM_LOW} = ${DOM_UPPER}
+     ${DOM_LOW} = ${DOM_UPPER}
 
 [logging]
     kdc = FILE:/var/log/krb5kdc.log
@@ -176,14 +182,14 @@ EOF
 # /var/kerberos/krb5kdc/kdc.conf
 
 cat << EOF > /var/kerberos/krb5kdc/kdc.conf
-default_realm = FOO.COM
+default_realm = ${DOM_UPPER}
 
 [kdcdefaults]
     v4_mode = nopreauth
     kdc_ports = 88
     kdc_tcp_ports = 88
 [realms]
-    FOO.COM = {        
+    ${DOM_UPPER} = {        
         admin_keytab = /etc/kadm5.keytab
         database_name = /var/kerberos/krb5kdc/principal
         acl_file = /var/kerberos/krb5kdc/kadm5.acl
@@ -191,7 +197,8 @@ default_realm = FOO.COM
         max_life = 10h 0m 0s
         max_renewable_life = 7d 0h 0m 0s
         master_key_type = des3-hmac-sha1
-        supported_enctypes = arcfour-hmac:normal des3-hmac-sha1:normal des-cbc-crc:normal des:normal des:v4 des:norealm des:onlyrealm des:afs3
+        supported_enctypes = arcfour-hmac:normal des3-hmac-sha1:normal \
+des-cbc-crc:normal des:normal des:v4 des:norealm des:onlyrealm des:afs3
         default_principal_flags = +preauth
     }
 EOF
@@ -200,13 +207,13 @@ EOF
 
 # /var/kerberos/krb5kdc/kadm5.acl
 
-echo '*/admin@FOO.COM	    *' > /var/kerberos/krb5kdc/kadm5.acl
+echo "*/admin@${DOM_UPPER}	    *" > /var/kerberos/krb5kdc/kadm5.acl
 
 
 
 # Create the database and set a good password which you can remember. This command also stashes your password on the KDC so you don’t have to enter it each time you start the KDC
 
-kdb5_util create -r FOO.COM -s
+kdb5_util create -r ${DOM_UPPER} -s
 
 
 
@@ -224,23 +231,23 @@ kadmin.local -q 'ktadd -k /var/kerberos/krb5kdc/kadm5.keytab kadmin/changepw'
 kadmin.local -q listprincs
 
 '
-Authenticating as principal root/admin@FOO.COM with password.
-K/M@FOO.COM
-kadmin/admin@FOO.COM
-kadmin/changepw@FOO.COM
-kadmin/ec2-23-23-86-44.compute-1.amazonaws.com@FOO.COM
-kiprop/ec2-23-23-86-44.compute-1.amazonaws.com@FOO.COM
-krbtgt/FOO.COM@FOO.COM
-root/admin@FOO.COM
-user1@FOO.COM
+Authenticating as principal root/admin@${DOM_UPPER} with password.
+K/M@DOMINIO
+kadmin/admin@DOMINIO
+kadmin/changepw@DOMINIO
+kadmin/ec2-23-23-86-44.compute-1.amazonaws.com@${DOM_UPPER}
+kiprop/ec2-23-23-86-44.compute-1.amazonaws.com@${DOM_UPPER}
+krbtgt/${DOM_UPPER}@DOMINIO
+root/admin@DOMINIO
+user1@DOMINIO
 '
 
 
 
 # Apagar principais desnecessários:
 
-kadmin.local -q 'delprinc kadmin/ec2-23-23-86-44.compute-1.amazonaws.com@FOO.COM'
-kadmin.local -q 'delprinc kiprop/ec2-23-23-86-44.compute-1.amazonaws.com@FOO.COM'
+kadmin.local -q 'delprinc kadmin/ec2-23-23-86-44.compute-1.amazonaws.com@${DOM_UPPER}'
+kadmin.local -q 'delprinc kiprop/ec2-23-23-86-44.compute-1.amazonaws.com@${DOM_UPPER}'
 
 
 
@@ -253,8 +260,8 @@ systemctl enable k{rb5kdc,admin}.service
 
 # Agora, vamos criar uma entidade principal para o nosso servidor KDC e colocá-lo na tabela de chaves (keytab):
 
-kadmin.local -q 'addprinc -randkey host/kerberos.foo.com'
-kadmin.local -q 'ktadd host/kerberos.foo.com'
+kadmin.local -q 'addprinc -randkey host/kerberos.${DOM_UPPER}'
+kadmin.local -q 'ktadd host/kerberos.${DOM_UPPER}'
 
 
 
@@ -272,7 +279,7 @@ yum -y install krb5-workstation && yum clean all
 
 # Transfira seu /etc/krb5.conf (que foi criado a partir do comando acima) do servidor KDC para o cliente:
 
-scp root@kerberos.foo.com:/etc/krb5.conf /etc/krb5.conf
+scp root@kerberos.${DOM_UPPER}:/etc/krb5.conf /etc/krb5.conf
 
 
 
@@ -284,8 +291,8 @@ kadmin -p root/admin
 
 # Adicione alguns principais no host:
 
-kadmin -q 'addprinc -randkey host/client.foo.com'
-kadmin -q 'ktadd host/kerberos.foo.com'
+kadmin -q 'addprinc -randkey host/client.${DOM_UPPER}'
+kadmin -q 'ktadd host/kerberos.${DOM_UPPER}'
 
 
 
@@ -302,7 +309,7 @@ Step1: Configuring SSH Server
 
 # 
 
-kinit -k host/foo.com@FOO.COM
+kinit -k host/${DOM_UPPER}@${DOM_UPPER}
 
 
 
