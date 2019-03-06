@@ -289,6 +289,12 @@ yum -y install krb5-workstation && yum clean all
 
 
 
+# Digite o endereço do servidor Kerberos:
+
+yum -y install krb5-workstation && yum clean all
+
+
+
 # Transfira seu /etc/krb5.conf (que foi criado a partir do comando acima) do servidor KDC para o cliente:
 
 scp root@kerberos.${DOM_UPPER}:/etc/krb5.conf /etc/krb5.conf
