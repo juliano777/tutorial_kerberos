@@ -362,29 +362,3 @@ Configure /etc/ssh_config to include following lines:
 Host *.domain.com
   GSSAPIAuthentication yes
   GSSAPIDelegateCredentials yes
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
