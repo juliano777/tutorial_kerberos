@@ -272,6 +272,12 @@ kadmin.local -q "ktadd host/${SRV_HOSTNAME}.${DOM_UPPER}"
 
 
 
+# From the command line we can allow Kerberos authentication either using authconfig-tui or simply with the command:
+
+authconfig  --enablekrb5 --update
+
+
+
 # =============================================================================
 # Configurando o Cliente Kerberos
 # =============================================================================
