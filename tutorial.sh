@@ -313,9 +313,15 @@ export DOM_UPPER=`echo ${DOM_LOW} | tr 'a-z' 'A-Z'`
 
 
 
+# Client hostname:
+
+export CLIENT_HOSTNAME=`hostname | cut -f1 -d.`
+
+
+
 # Adicione alguns principais no host:
 
-kadmin -q "addprinc -randkey host/client.${DOM_UPPER}" -p root/admin
+kadmin -q "addprinc -randkey host/${CLIENT_HOSTNAME}.${DOM_UPPER}" -p root/admin
 kadmin -q "ktadd host/kerberos.${DOM_UPPER}" -p root/admin
 
 
