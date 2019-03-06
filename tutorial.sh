@@ -62,11 +62,6 @@ Principais informações contidas no ticket:
 Cada ticket tem uma expiração (geralmente 10 horas).
 "
 
-# 
-# Realm: ${DOM_UPPER}
-# DNS: ${DOM_UPPER}
-# hostname
-# Servidor: kdc.${DOM_UPPER}
 
 "
 Packages required:
