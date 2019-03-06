@@ -124,6 +124,12 @@ export SRV_FQDN="${SRV_HOSTNAME}.${DOM_LOW}"
 
 
 
+# Configurando o hostname:
+
+hostnamectl set-hostname ${SRV_FQDN}
+
+
+
 # Sincronizando o relógio do sistema;
 
 ntpdate ${NTPSERVER}
