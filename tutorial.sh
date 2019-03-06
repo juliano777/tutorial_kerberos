@@ -219,7 +219,7 @@ kdb5_util create -r ${DOM_UPPER} -s
 
 # Now on the KDC create a admin principal and also a test user (user1):
 
-kadmin.local -q 'addprinc root/admin'
+# kadmin.local -q 'addprinc root/admin'
 kadmin.local -q 'addprinc user1'
 kadmin.local -q 'ktadd -k /var/kerberos/krb5kdc/kadm5.keytab kadmin/admin'
 kadmin.local -q 'ktadd -k /var/kerberos/krb5kdc/kadm5.keytab kadmin/changepw'
