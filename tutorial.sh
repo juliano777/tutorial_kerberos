@@ -100,6 +100,18 @@ read -p 'Digite o endereço de servidor NTP: ' NTPSERVER
 
 
 
+# Digite o seu domínio:
+
+read -p 'Digite o seu domínio: ' DOM_LOW
+
+
+
+# Convertendo o domínio para letras maiúsculas
+
+export DOM_UPPER=`echo ${DOM_LOW} | tr 'a-z' 'A-Z'`
+
+
+
 # Sincronizando o relógio do sistema;
 
 ntpdate ${NTPSERVER}
