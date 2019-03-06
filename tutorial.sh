@@ -120,7 +120,7 @@ export SRV_HOSTNAME=`hostname | cut -f1 -d.`
 
 # FQDN DO SERVER
 
-export SRV_FQDN="`${SRV_HOSTNAME}.${DOM_LOW}"
+export SRV_FQDN="${SRV_HOSTNAME}.${DOM_LOW}"
 
 
 
